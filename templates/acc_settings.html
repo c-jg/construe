@@ -1,0 +1,26 @@
+{% extends 'dash_layout.html' %}
+
+{% block title %}
+Account Settings
+{% endblock %}
+
+{% block header_text %}
+{% endblock %}
+
+{% block main_title %}
+Account Settings
+{% endblock %}
+
+{% block content %}
+<ul>
+	<li>
+		<p><a href="{% url 'account_email' %}">Update Email Address</a></p>
+	</li>
+	<li>
+		<p><a href="{% url 'account_change_password' %}">Change Password</a></p>
+	</li>
+	<li>
+		<p><a href="{% url 'account_logout' %}">Logout</a></p>
+	</li>
+</ul>
+{% endblock %}

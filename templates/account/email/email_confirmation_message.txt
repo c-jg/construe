@@ -1,0 +1,7 @@
+Hello from construe-app.com!
+
+Thank you for signing up for Construe!  Before you can get started, we need to confirm this is your correct email address.
+
+To confirm this is correct, go to {{ activate_url }}
+
+Thank you from Construe!

@@ -1,0 +1,104 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta class="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Construe: Request Custom Plan Information</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+</head>
+
+<body>
+    {% if messages %}
+    <div>
+        <strong>Messages:</strong>
+        <ul>
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form class="form-signin" id="signup_form" method="POST" action="{% url 'account_signup' %}">{% csrf_token %}
+        <div class="text-center mb-4">
+            <a href="{% url 'home' %}"><img class="mb-4" src="{% static 'img/CSTR_LOGO.png' %}" alt="construe-logo"
+                    width="130" height="130"></a>
+            <h1 class="h3 mb-3 font-weight-normal">Request Custom Plan Information</h1>
+            <p><b>Let us know what you're looking for and we'll get back to you within 24 hours.</b></p>
+        </div>
+
+        <div class="form-label-group">
+            {{ form.first_name }}
+            <label>{{ form.first_name.label }}</label>
+        </div>
+
+        <div class="form-label-group">
+            {{ form.email }}
+            <label>{{ form.email.label }}</label>
+        </div>
+
+        <div class="form-label-group">
+            {{ form.comments }}
+            <label>{{ form.comments.label }}</label>
+        </div>
+
+        <p><b>Check the below boxes for what you need:</b></p>
+
+        <div class="checkbox mb-3">
+            {{ form.full_channel }}
+            <label>All comments from channel</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            {{ form.multiple_channels }}
+            <label>All comments from multiple channels</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            {{ form.advertisement }}
+            <label>Advertisement comment analysis</label>
+        </div>
+
+        <div class="checkbox mb-3">
+            {{ form.other_platforms }}
+            <label>Comments from other platforms (Facebook, Instagram, Twitter, etc.)</label>
+        </div>
+
+        <div class="form-label-group">
+            {{ form.message }}
+            <label>{{ form.message.label }}</label>
+        </div>
+
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <p>By creating a Construe account, you agree to all <a href="{% url 'terms_out' %}"><b>Terms &
+                    Conditions</b></a>.</p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+    </form>
+    <script>
+        var n = document.getElementById('id_first_name');
+        var email = document.getElementById('id_email');
+        var comm = document.getElementById('id_comments');
+        var mult = document.getElementById('id_multiple_channels');
+        var ad = document.getElementById('id_advertisement');
+        var other = document.getElementById('id_other_platforms');
+        var message = document.getElementById('id_message');
+        n.className = 'form-control';
+        email.className = 'form-control';
+        comm.className = 'form-control';
+        mult.className = 'form-control';
+        ad.className = 'form-control';
+        other.className = 'form-control';
+        message.className = 'form-control';
+
+    </script>
+
+</body>
+
+</html>

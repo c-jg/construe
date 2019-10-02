@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Plan Canceled
+{% endblock %}
+
+{% block header %}
+Your subscription has been canceled.
+{% endblock %}
+
+{% block header_text %}
+Your account dashboard may take a few days to update. You can disregard any messages about future payment, you will no
+longer be charged.</a><br>
+<a href="{% url 'home' %}"><b>Click here</b> to return to the homepage.
+    {% endblock %}

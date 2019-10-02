@@ -1,0 +1,84 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta class="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Construe: {% block head_title %}{% endblock %}</title>
+  {% block extra_head %}
+  {% endblock %}
+  <link rel='stylesheet' href="{% static 'css/style.min.css' %}" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+
+</head>
+
+<body>
+  <!-- navbar -->
+  <div class="navbar navbar--extended">
+    <nav class="nav__mobile"></nav>
+    <div class="containerr">
+      <div class="navbar__inner">
+        <a href="{% url 'home' %}" class="navbar__logo"><img src="{% static 'img/CSTR_TEXT.png' %}" alt="construe-logo"
+            style="padding-top: 10px;"></a>
+        <nav class="navbar__menu">
+          <ul>
+            {% if user.is_authenticated %}
+            <li><a class="{{ features_page }}" style="{{ features_style }}" href="{% url 'features' %}">Features</a>
+            </li>
+            <li><a class="{{ price_page }}" style="{{ price_style }}" href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a style="{{ contact_style }}" href="{% url 'contact' %}">Contact</a></li>
+            <li><a class="{{ dash_page }}" style="{{ dash_style }}" href="{% url 'saved' %}"><b>Dashboard</b></a></li>
+            <li><a class="{{ lyz_style }}" href="{% url 'report_create' %}"><b>Analyze</b></a></li>
+            {% else %}
+            <li><a class="{{ features_page }}" style="{{ features_style }}" href="{% url 'features' %}">Features</a>
+            </li>
+            <li><a class="{{ price_page }}" style="{{ price_style }}" href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a style="{{ contact_style }}" href="{% url 'contact' %}">Contact</a></li>
+            <li><a style="{{ login_style }}" href="{% url 'account_login' %}">Login</a></li>
+            <li><a style="{{ signup_style }}" href="{% url 'account_signup' %}"><b>Sign Up</b></a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512">
+              <path fill="currentColor"
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+                class=""></path>
+            </svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page__header">
+    <div class="hero__overlay hero__overlay--gradient"></div>
+    <div class="hero__mask"></div>
+    <div class="page__header__inner">
+      <div class="containerr">
+        <div class="page__header__content">
+          <div class="page__header__content__inner" id='navConverter'>
+            <h1 class="page__header__title">{% block main_title %}{% endblock %}</h1>
+            <p class="page__header__text">{% block main_sub %}{% endblock %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="containerr">
+    <div class="auth__inner">
+      {% block image %}
+      {% endblock %}
+      <div class="auth__auth">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  {% block extra_body %}
+  {% endblock %}
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

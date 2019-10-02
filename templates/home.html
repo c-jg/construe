@@ -1,0 +1,165 @@
+{% extends 'home_layout.html' %}
+{% load staticfiles %}
+
+{% block title %}
+	<title>Construe: Analyze YouTube Comments at Scale</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="hero" id="home">
+		<div class="hero__overlay hero__overlay--gradient"></div>
+		<div class="hero__mask"></div>
+		<div class="hero__inner">
+			<div class="containerr">
+				<div class="hero__content">
+					<div class="hero__content__inner" id='navConverter' style="padding-right: 150px;">
+						<h1 class="hero__title">Analyze comments at scale</h1>
+						<p class="hero__text">Construe uses AI to gather information from thousands of YouTube comments and convert it into data that's easy to understand.</p>
+						{% if user.is_authenticated %}
+						<a href="{% url 'report_create' %}" class="button button__accent">Get Started</a>
+						<a href="{% url 'features' %}" class="button hero__button">Learn more</a>
+						{% else %}
+						<a href="{% url 'account_signup' %}" class="button button__accent">Get Started</a>
+						<a href="{% url 'features' %}" class="button hero__button">Learn more</a>
+						{% endif %}						
+					</div>
+					<div>
+						<canvas id="barChart" width="525" height="525"></canvas>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="hero__sub">
+		<span id="scrollToNext" class="scroll">
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" class='hero__sub__down' fill="currentColor" width="512px" height="512px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><path d="M256,298.3L256,298.3L256,298.3l174.2-167.2c4.3-4.2,11.4-4.1,15.8,0.2l30.6,29.9c4.4,4.3,4.5,11.3,0.2,15.5L264.1,380.9c-2.2,2.2-5.2,3.2-8.1,3c-3,0.1-5.9-0.9-8.1-3L35.2,176.7c-4.3-4.2-4.2-11.2,0.2-15.5L66,131.3c4.4-4.3,11.5-4.4,15.8-0.2L256,298.3z"/></svg>
+		</span>
+	</div>
+	<!-- Steps -->
+	<div class="steps landing__section" id="features">
+		<div class="containerr">
+			<h2>Simplifying Large Amounts of Data</h2>
+			<p>Content creators don't have the time to read through hundreds of thousands of YouTube comments.  Construe uses AI and machine learning to read through all the comments from a video or channel and pick out the most important information. This info is displayed in charts that are easy to understand and give you a full picture of the conversation.</p>
+		</div>
+		<div class="containerr">
+			<div class="steps__inner">
+				<div class="step">
+					<div class="step__media">
+						<img src="{% static './img/undraw_messages1_9ah2.svg' %}" class="step__image">
+					</div>
+					<h4>Gather Keyphrases</h4>
+					<p class="step__text">Know what words and phrases are being used most often.</p>
+				</div>
+				<div class="step">
+					<div class="step__media">
+						<img src="{% static './img/undraw_filter_4kje.svg' %}" class="step__image">
+					</div>
+					<h4>Detect Spam</h4>
+					<p class="step__text">Identify the amount of spam being posted in the comments.</p>
+				</div>
+				<div class="step">
+					<div class="step__media">
+						<img src="{% static './img/undraw_file_searching_duff.svg' %}" class="step__image">						
+					</div>
+					<h4>Extract Entities</h4>
+					<p class="step__text">Easily identify what your viewers think about different people, places, and ideas.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Expanded sections -->
+	<div class="expanded landing__section">
+		<div class="containerr">
+			<div class="expanded__inner">
+				<div class="expanded__media"> 
+					<img src="{% static './img/undraw_analytics_5pgy.svg' %}" class="expanded__image">					
+				</div>
+				<div class="expanded__content">
+					<h2 class="expanded__title">Built with clarity in mind</h2>
+					<p class="expanded__text">Our simplistic charts make it easy to understand large amounts of data that were once confusing and hard to interpret.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="expanded landing__section">
+		<div class="containerr">
+			<div class="expanded__inner">
+				<div class="expanded__media">
+					<img src="{% static './img/undraw_artificial_intelligence_upfn.svg' %}" class="expanded__image">					
+				</div>
+				<div class="expanded__content">
+					<h2 class="expanded__title">Integrated with industry leading tech</h2>
+					<p class="expanded__text">We combine models we build in-house with artificial intelligence software from industry leaders to get the highest level of accuracy and certainty.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="expanded landing__section">
+		<div class="containerr">
+			<div class="expanded__inner">
+				<div class="expanded__media">
+					<img src="{% static './img/undraw_server_q2pb.svg' %}" class="expanded__image">
+				</div>
+				<div class="expanded__content">
+					<h2 class="expanded__title">Fully Cloud Based</h2>
+					<p class="expanded__text">There's no need to download anything, our software can be accessed from anywhere.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Call To Action -->
+	<div class="cta cta--reverse">
+		<div class="containerr">
+			<div class="cta__inner">
+				<h2 class="cta__title">Need more?</h2>
+				<p class="cta__sub cta__sub--center">We can build custom models tailored to your channel-specific needs.  Request a free demo to let us show you how much more Construe can do.</p>
+				<a href="{% url 'contact' %}" class="button button__accent">Request Free Demo</a>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<div class="footer footer--dark">
+		<div class="containerr">
+			<div class="footer__inner">
+				<a href="index.html" class="footer__textLogo">Construe</a>
+				<div class="footer__data">
+					<!-- <div class="footer__data__item">
+						<div class="footer__row">
+							Created by <a href="https://twitter.com/ninalimpi" target="_blank" class="footer__link">Katerina Limpitsouni</a>
+						</div>
+						<div class="footer__row">
+						Code/design by <a href="https://twitter.com/anges244" target="_blank" class="footer__link">Aggelos Gesoulis</a>
+						</div>
+					</div>
+					<div class="footer__data__item">
+						<div class="footer__row">Created for <a href="https://undraw.co" target="_blank" class="footer__link">unDraw</a>
+						</div>
+					</div> -->
+					<div class="footer__data__item">
+					<div class="footer__row">
+						<a href="{% url 'home' %}" class="footer__link">Home</a>
+					</div>
+					<div class="footer__row">
+						<a href="{% url 'features' %}" class="footer__link">Features</a>
+					</div>
+					<div class="footer__row">
+						<a href="{% url 'pricing' %}" class="footer__link">Pricing</a>
+					</div>
+					<div class="footer__row">
+						<a href="{% url 'contact' %}" class="footer__link">Contact Us</a>
+					</div>
+					<div class="footer__row">
+						<a href="{% url 'terms_out' %}" class="footer__link">Terms & Conditions</a>
+					</div>
+					<div class="footer__row">
+						<a href="{% url 'privacy_out' %}" class="footer__link">Privacy Policy</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script src="{% static 'js/home_charts.js' %}"></script>
+
+{% endblock %}

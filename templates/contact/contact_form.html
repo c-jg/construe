@@ -1,0 +1,30 @@
+{% extends 'base_layout.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block header %}
+Contact Us
+{% endblock %}
+
+{% block header_text %}
+Send us a message and we'll get back to you within 24 hours.
+{% endblock %}
+
+{% block content %}
+	<div class="containerr">
+		<div class="auth__inner">
+			<div class="auth__media">
+				<img src="{% static './img/undraw_mail_box_kd5i.svg' %}">
+			</div>
+			<div class="auth__auth">
+				<form method="POST"> {% csrf_token %}
+					{{ form.as_p }}
+					<button type="submit" class="button button__accent">Send</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

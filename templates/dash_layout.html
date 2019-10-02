@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta class="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">    
+    <title>Construe: {% block title %}{% endblock %}</title>
+    <link rel='stylesheet' href="{% static 'css/style.min.css' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+    <style>
+    .active_page {
+        border-bottom: 1px solid #fff;
+    }
+    </style>
+</head>
+<body>
+	<!-- navbar -->
+	<div class="navbar navbar--extended">
+		<nav class="nav__mobile"></nav>
+		<div class="containerr">
+			<div class="navbar__inner">
+				<a href="{% url 'home' %}" class="navbar__logo"><img src="{% static 'img/CSTR_TEXT.png' %}" alt="construe-logo" style="padding-top: 10px;"></a>
+				<nav class="navbar__menu">
+					<ul>
+						<li><a href="{% url 'features' %}">Features</a></li>
+						<li><a href="{% url 'pricing' %}">Pricing</a></li>
+						<li><a href="{% url 'contact' %}">Contact</a></li>
+						<li><a style="opacity:1;border-bottom: 1px solid #fff;" href="{% url 'saved' %}"><b>Dashboard</b></a></li>
+						<li><a href="{% url 'report_create' %}"><b>Analyze</b></a></li>						
+					</ul>
+				</nav>
+				<div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a></div>
+			</div>
+		</div>
+    </div>
+    <!-- Page Content -->
+    <div class="page__header">
+        <div class="hero__overlay hero__overlay--gradient"></div>
+        <div class="hero__mask"></div>
+        <div class="page__header__inner">
+            <div class="containerr">
+                <div class="page__header__content">
+                    <div class="page__header__content__inner" id='navConverter'>
+                        <h1 class="page__header__title">Dashboard</h1>
+                        <p class="page__header__text">{% block header_text %}{% endblock %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+            <div class="containerr">
+                <div class="page__inner">
+                    <div class="page__menu">
+                        <ul class="vMenu">
+                            <li><a href="{% url 'saved' %}" class="{% block active %}{% endblock %}">Saved Reports</a></li>
+                            <li><a href="{% url 'acc_sett' %}" class="{{ account_act }}">Account Settings</a></li>
+                            <li><a href="{% url 'billing' %}" class="{{ billing_act }}">Billing</a></li>
+                            <li><a href="{% url 'privacy_policy' %}" class="{{ privacy_act }}">Privacy Policy</a></li>
+                            <li><a href="{% url 'terms' %}" class="{{ terms_act }}">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="page__main">
+                        <div class="text-container">
+                            <h2 class="page__main__title">{% block main_title %}{% endblock %}</h2>
+                            {% block content %}
+                            {% endblock %}                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

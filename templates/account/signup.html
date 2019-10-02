@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta class="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Construe: Sign Up</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+</head>
+
+<body>
+
+  {% if messages %}
+  <div>
+    <strong>Messages:</strong>
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <form class="form-signin" id="signup_form" method="POST" action="{% url 'account_signup' %}">{% csrf_token %}
+    <div class="text-center mb-4">
+      <a href="{% url 'home' %}"><img class="mb-4" src="{% static 'img/CSTR_LOGO.png' %}" alt="construe-logo"
+          width="130" height="130"></a>
+      <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+      <p><a href="{{ login_url }}"><b>Login here.</b></a></p>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.username }}
+      <label>{{ form.username.label }}</label>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.email }}
+      <label>{{ form.email.label }}</label>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.password1 }}
+      <label>{{ form.password1.label }}</label>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.password2 }}
+      <label>{{ form.password2.label }}</label>
+    </div>
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <p>By creating a Construe account, you agree to all <a href="{% url 'terms_out' %}"><b>Terms &
+          Conditions</b></a>.</p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+  </form>
+  <script>
+    var email = document.getElementById('id_email');
+    var usern = document.getElementById('id_username');
+    var pass1 = document.getElementById('id_password1');
+    var pass2 = document.getElementById('id_password2');
+    email.className = 'form-control';
+    usern.className = 'form-control';
+    pass1.className = 'form-control';
+    pass2.className = 'form-control';
+  </script>
+
+</body>
+
+</html>

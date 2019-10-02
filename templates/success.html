@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+
+{% block title %}
+Plan Confirmed
+{% endblock %}
+
+{% block header %}
+You're in! 
+{% endblock %}
+
+{% block header_text %}
+You can now begin analyzing up to 100,000 comments every month!<br>
+<a href="{% url 'report_create' %}"><b>Click here</b> to create a report.</a>
+{% endblock %}

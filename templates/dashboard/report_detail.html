@@ -1,0 +1,248 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <!-- object.report_name returns current report's title -->
+    <title>Construe: {{ object.report_name }}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    
+    <link rel="stylesheet" href="{% static 'css/analysis.css' %}">
+</head>
+<body>
+    <script>
+        var kX = {{ object.keywords|safe }};
+        var kY = {{ object.keyword_count|safe }};
+        
+        var nSP = {{ not_spam }};
+        var sP = {{ object.spam }};
+
+        var eX = {{ object.entities|safe }};
+        var eY = {{ object.entity_count|safe }};
+
+        var cX = {{ object.concepts|safe }};
+        var cY = [{% for c in object.concept_relevance %}{{ c|safe }},{% endfor %}]
+
+        var sY = {{ object.sentiment|safe }};
+
+    </script>
+
+    <nav class="navbar navbar-dark fixed-top bg-light flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'home' %}"><img src="{% static 'img/CSTR_TEXT_SM.png' %}" alt="construe-logo"></a>
+        <h5 style="color: black"><b>{{ object.title }}</b></h5>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+            </li>
+        </ul>
+    </nav>    
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="keys();return false;">
+                    <span data-feather="key"></span>
+                    Keyphrases <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="spam();return false;">
+                    <span data-feather="alert-triangle"></span>
+                    Spam
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="ent();return false;">
+                    <span data-feather="users"></span>
+                    Entities
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="concepts();return false;">
+                    <span data-feather="info"></span>
+                    Concepts
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="sentiment();return false;">
+                    <span data-feather="smile"></span>
+                    Sentiment
+                    </a>
+                </li>
+                </ul>
+            
+                <ul class="nav flex-column mb-2">
+                </ul>
+            </div>
+            </nav>
+            
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 id="chart-header" class="h2">Keyphrases</h1>                 
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'report_create' %}">Analyze Video</a>
+                            <a class="btn btn-sm btn-outline-secondary" href="{% url 'saved' %}">Saved Reports</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <canvas class="my-4 w-100" id="myChart" width="900" style="display: block" height="380"></canvas>
+                <canvas class="my-4 w-100" id="canvSpam" style="display: none;" width="900" height="380"></canvas>
+                <canvas class="my-4 w-100" id="canvEnt" style="display: none;" width="900" height="380"></canvas>
+                <canvas class="my-4 w-100" id="canvCon" style="display: none;" width="900" height="380"></canvas>
+                <canvas class="my-4 w-100" id="canvSent" style="display: none;" width="900" height="380"></canvas>
+                
+                <h2>Dataset</h2>
+                <div id="keyword-table" class="table-responsive" style="display: block;">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>                            
+                            <th id="dataset-title">Keyphrase</th>
+                            <th id="dataset-second">Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody id="keyword-table">                        
+                        {% for i, e in keyword_data %}
+                        <tr>                            
+                            <td>{{ i }}</td>
+                            <td>{{ e }}</td>                     
+                        </tr>        
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+                
+                <div id="spam-table" class="table-responsive" style="display: none;">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>                            
+                            <th id="dataset-title">Spam</th>
+                            <th id="dataset-second">Not Spam</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>                            
+                            <td>{{ object.spam }}</td>
+                            <td>{{ not_spam }}</td>                     
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+
+                <div id="entity-table" class="table-responsive" style="display: none;">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>                            
+                            <th id="dataset-title">Entity</th>
+                            <th id="dataset-second">Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        {% for i, e in entity_data %}
+                        <tr>                            
+                            <td>{{ i }}</td>
+                            <td>{{ e }}</td>                     
+                        </tr>        
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+
+                <div id="concept-table" class="table-responsive" style="display: none;">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>                            
+                            <th id="dataset-title">Concept</th>
+                            <th id="dataset-second">Relevance</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        {% for i, e in concept_data %}
+                        <tr>                            
+                            <td>{{ i }}</td>
+                            <td>{{ e }}</td>                     
+                        </tr>        
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+
+                <div id="sentiment-table" class="table-responsive" style="display: none;">
+                    <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>                            
+                            <th id="dataset-title">Sentiment</th>
+                            <th id="dataset-second">Frequency</th>
+                        </tr>
+                    </thead>
+                    <tbody>                        
+                        <tr>
+                            <td>Very Negative</td>
+                            <td>{{ object.sentiment.0 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Negative</td>
+                            <td>{{ object.sentiment.1 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Slightly Negative</td>
+                            <td>{{ object.sentiment.2 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Neutral</td>
+                            <td>{{ object.sentiment.3 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Slighly Postive</td>
+                            <td>{{ object.sentiment.4 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Positive</td>
+                            <td>{{ object.sentiment.5 }}</td>                    
+                        </tr>
+                        <tr>
+                            <td>Very Postive</td>
+                            <td>{{ object.sentiment.6 }}</td>                    
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+                </div>
+
+            </main>
+            </div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="{% static 'js/analysis.js'%}"></script>
+</body>
+</html>

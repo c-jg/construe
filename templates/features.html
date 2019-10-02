@@ -1,0 +1,173 @@
+{% extends 'base_layout.html' %}
+{% load staticfiles %}
+
+{% block title %}
+Features
+{% endblock %}
+
+{% block extra %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block header %}
+Features
+{% endblock %}
+
+{% block header_text %}
+See how Construe makes it easy to understand thousands of comments.
+{% endblock %}
+
+{% block content %}
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <img src="{% static './img/undraw_file_searching_duff.svg' %}" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Extract Relevant Data</h2>
+                <p class="expanded__text">We cluster together the most commonly used words and phrases that are in the
+                    comments, helping you understand what your viewers frequently say. Learn how your viewers feel about
+                    popular people, places, and ideas and understand the basic ideas being discussed in the comments.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <canvas id="kChart" width="400" height="400"></canvas>
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Clear, Simple Charts </h2>
+                <p class="expanded__text">Get a visual representation of all the different metrics Construe provides.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <div class="table-responsive" style="display: block;">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th id="dataset-title">Concept</th>
+                                <th id="dataset-second">Relevance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pizza</td>
+                                <td>.99</td>
+                            </tr>
+                            <tr>
+                                <td>New York</td>
+                                <td>.89</td>
+                            </tr>
+                            <tr>
+                                <td>Food</td>
+                                <td>.89</td>
+                            </tr>
+                            <tr>
+                                <td>Travel</td>
+                                <td>.45</td>
+                            </tr>
+                            <tr>
+                                <td>Restaurants</td>
+                                <td>.33</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Data Tables</h2>
+                <p class="expanded__text">View frequency, count, and percentages in a simple format that gives you a
+                    clear view of important analytics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <img src="{% static './img/undraw_browser.svg' %}" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Track Advertisements</h2>
+                <p class="expanded__text">If you have a promotion in your video, you and your sponsor both want to know
+                    what people are saying about it. Construe checks for all reactions to the sponsor and displays the
+                    keyphrases, entities, and sentiment so you and your sponsor know how the advertisement went. </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <img src="{% static './img/undraw_add_file2_gvbb.svg' %}" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Save Reports</h2>
+                <p class="expanded__text">We save all of your reports in your account dashboard so you can access them
+                    at any time.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <img src="{% static './img/undraw_tabs.svg' %}" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Analyze Multiple Videos</h2>
+                <p class="expanded__text">Get comment reports for multiple videos or channels.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="expanded landing__section">
+    <div class="containerr">
+        <div class="expanded__inner">
+            <div class="expanded__media">
+                <img src="{% static './img/undraw_charts_jj6t.svg' %}" class="expanded__image">
+            </div>
+            <div class="expanded__content">
+                <h2 class="expanded__title">Sentiment Analysis</h2>
+                <p class="expanded__text">Construe analyzes each comment individually and gives it a score depending on
+                    how positive or negative it is.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta cta--reverse">
+    <div class="containerr">
+        <div class="cta__inner">
+            <h2 class="cta__title">Need more?</h2>
+            <p class="cta__sub cta__sub--center">We can build custom models tailored to your channel-specific needs.
+                Request a free demo to let us show you how much more Construe can do.</p>
+            <a href="{% url 'contact' %}" class="button button__accent">Request Free Demo</a>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/features.js' %}"></script>
+{% endblock %}

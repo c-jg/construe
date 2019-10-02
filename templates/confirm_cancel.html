@@ -1,0 +1,13 @@
+{% extends "prodbase.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Cancel Paid Plan{% endblock %}
+
+{% block content %}
+<h1>Cancel Paid Plan</h1>
+
+<p>Are you sure you want to cancel your subscription?</p>
+<button><a href="{% url 'billing' %}">Go Back</a></button>
+<button><a href="{% url 'cancel_subscription' %}">Confirm Cancellation</a></button>
+{% endblock %}

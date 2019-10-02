@@ -1,0 +1,95 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta class="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Construe: Sign In</title>
+  <link rel='stylesheet' href="{% static 'css/style.min.css' %}" />
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+</head>
+
+<body>
+  <!-- navbar -->
+  <div class="navbar navbar--extended">
+    <nav class="nav__mobile"></nav>
+    <div class="containerr">
+      <div class="navbar__inner">
+        <a href="{% url 'home' %}" class="navbar__logo"><img src="{% static 'img/CSTR_TEXT.png' %}" alt="construe-logo"
+            style="padding-top: 10px;"></a>
+        <nav class="navbar__menu">
+          <ul>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'features' %}">Features</a></li>
+            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a href="{% url 'saved' %}"><b>Dashboard</b></a></li>
+            <li><a href="{% url 'report_create' %}"><b>Analyze</b></a></li>
+            {% else %}
+            <li><a href="{% url 'features' %}">Features</a></li>
+            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li><a style="opacity:1;border-bottom: 1px solid #fff;" href="{% url 'account_login' %}">Login</a></li>
+            <li><a href="{% url 'account_signup' %}"><b>Sign Up</b></a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <div class="navbar__menu-mob"><a href="" id='toggle'><svg role="img" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512">
+              <path fill="currentColor"
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+                class=""></path>
+            </svg></a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page__header">
+    <div class="hero__overlay hero__overlay--gradient"></div>
+    <div class="hero__mask"></div>
+    <div class="page__header__inner">
+      <div class="containerr">
+        <div class="page__header__content">
+          <div class="page__header__content__inner" id='navConverter'>
+            <h1 class="page__header__title">Sign In</h1>
+            <p class="page__header__text">Login or <a href="{{ signup_url }}"><b>Create an account here.</b></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if messages %}
+  <div>
+    <strong>Messages:</strong>
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <div class="containerr">
+    <div class="auth__inner">
+      <div class="auth__media">
+        <img style="max-height: 275px" src="{% static 'img/undraw_account_490v.svg' %}">
+      </div>
+      <div class="auth__auth">
+        <form class="login form" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+          <button class="primaryAction button button__accent" type="submit">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

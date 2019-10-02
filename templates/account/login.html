@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta class="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Construe: Sign In</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/CSTR_LOGO.png' %}">
+</head>
+
+<body>
+  <form class="form-signin" method="POST" action="{% url 'account_login' %}">{% csrf_token %}
+    <div class="text-center mb-4">
+      <a href="{% url 'home' %}"><img class="mb-4" src="{% static 'img/CSTR_LOGO.png' %}" alt="construe-logo"
+          width="130" height="130"></a>
+      <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+      {% if messages %}
+      <div>        
+        <ul>
+          {% for message in messages %}
+          <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      <p><a href="{{ signup_url }}"><b>Create an account here.</b></a></p>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.login }}
+      <label>Username or Email</label>
+    </div>
+
+    <div class="form-label-group">
+      {{ form.password }}
+      <label>{{ form.password.label }}</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      {{ form.remember }}
+      <label>
+        {{ form.remember.label }}
+      </label>
+    </div>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center"><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+  </form>
+  <script>
+    var passInput = document.getElementById('id_password');
+    passInput.className = 'form-control';
+    var userInput = document.getElementById('id_login');
+    userInput.className = 'form-control';
+    userInput.autofocus = true;
+  </script>
+
+</body>
+
+</html>

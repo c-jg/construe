@@ -1,0 +1,22 @@
+{% extends 'dash_layout.html' %}
+
+{% block title %}
+Saved Reports
+{% endblock %}
+
+{% block main_title %}
+Saved Reports
+{% endblock %}
+
+{% block active %}
+vMenu--active
+{% endblock %}
+
+{% block content %}
+
+    {% for report in reports %}
+    <li><a href="{% url 'report_details' report.id %}"><b>{{ report.report_name }}</b> - {{ report.created }}</a></li>
+    {% endfor %}
+    <br><button><a href="{% url 'report_create' %}">Analyze New Video</a></button>
+
+{% endblock %}

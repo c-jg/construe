@@ -1,0 +1,37 @@
+{% extends 'dash_layout.html' %}
+
+{% block title %}
+Account Settings
+{% endblock %}
+
+{% block header_text %}
+{% endblock %}
+
+{% block main_title %}
+Account Settings
+{% endblock %}
+
+{% block content %}
+<hr>
+{% if user_subscription != 'Free' %}
+<h4>Current Membership: <b>{{ user_membership.membership.membership_type }}</b> <small>since
+        {{ user_subscription.get_created_date }}</small></h4>
+<p>Next payment due: {{ user_subscription.get_next_billing_date }}</p>
+{% else %}
+<p>You don't have an active membership plan. Check them out here
+    <a href="{% url 'pricing' %}"></a>
+</p>
+{% endif %}
+<hr>
+<ul>
+    <li>
+        <p><a href="{% url 'account_email' %}">Update Email Address</a></p>
+    </li>
+    <li>
+        <p><a href="{% url 'account_change_password' %}">Change Password</a></p>
+    </li>
+    <li>
+        <p><a href="{% url 'account_logout' %}">Logout</a></p>
+    </li>
+</ul>
+{% endblock %}
