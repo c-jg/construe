@@ -1,2 +1,2 @@
 # construe
-Construe is an AI and machine learning program that reads through thousands of YouTube comments and gathers data.
+Construe is a web application that uses AI and machine learning to read through thousands of YouTube comments and gather relevant data.
