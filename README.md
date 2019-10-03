@@ -1,13 +1,15 @@
 # Construe
 Construe is a web application that uses AI and machine learning to read through thousands of YouTube comments and gather relevant data.
 
+Construe reads through thousands of comments in just seconds and displays important information in charts that make it easy to understand your audience. 
+
 ### Features
 - Scans through thousands of comments in seconds
 - Gathers keyphrases, concepts, entities, spam, and sentiment
 - Displays data in graphs and charts
 
 ### About
-Built on Django using Google Cloud Platform PostgreSQL server.  Comments are retrieved using the YouTube Data API.  Comment analysis done using NLTK, Scikit Learn trained model, and IBM Watson API.  Payments handled by Stripe.  Account handling done using Django Allauth.  The website HTML/CSS is using Bootstrap and Evie theme.
+Built on Django using Google Cloud Platform PostgreSQL server.  Hosted on GCP App Engine.  Comments are retrieved using the YouTube Data API.  Comment analysis done using NLTK, Scikit Learn trained model, and IBM Watson API.  Payments handled by Stripe.  Account handling done using Django Allauth.  The website HTML/CSS is using Bootstrap and Evie theme.  ChartsJS is used for the dashboard charts as well as some of the charts on the various pages.
 
 ### Website Screenshots
 The site is currently inactive.
