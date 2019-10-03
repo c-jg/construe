@@ -1,7 +1,7 @@
 # Construe
 Construe is a web application that uses AI and machine learning to read through thousands of YouTube comments and gather relevant data.
 
-Construe reads through thousands of comments in just seconds and displays important information in charts that make it easy to understand your audience. 
+It reads through thousands of comments in just seconds and displays important information in charts that make it easy to understand your audience. 
 
 ### Features
 - Scans through thousands of comments in seconds
