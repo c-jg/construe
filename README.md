@@ -38,5 +38,4 @@ The site is currently inactive.
 
 ![](Screenshots/Screen%20Shot%202019-10-02%20at%204.12.03%20PM.png)
 
-### Extra
-This is the first project I've done using most of these libraries so there are many parts to improve on.  The templates are a bit messy as well as a few of the dashboard scripts.  When creating this, I was not very concerned about always keeping things clean, but more so getting things working as fast as possible so I could understand how they work and apply them to more advanced projects.  
+ 
